@@ -92,10 +92,28 @@ A six-phase code-review pipeline:
 In Claude Code:
 
 ```
-/plugin install https://github.com/3moeslam/superdev-skill
+/plugin marketplace add 3moeslam/superdev-skill
+/plugin install superdev@superdev-skill
 ```
 
-Claude Code clones the repo and registers the plugin. Both skills become available immediately as `/superdev:superdev` and `/superdev:team-code-review`.
+(Or the explicit URL form: `/plugin marketplace add https://github.com/3moeslam/superdev-skill.git`.)
+
+Claude Code clones the repo, registers the marketplace, and installs the plugin. All three skills become available immediately as `/superdev:team-brainstorm`, `/superdev:superdev`, and `/superdev:team-code-review`, plus the `/superdev:use-superdev` command.
+
+**Update after the author pushes new commits:**
+
+```
+/plugin marketplace update superdev-skill
+/reload-plugins
+```
+
+(Claude Code does **not** auto-detect upstream changes — run the two-line dance above.)
+
+**Uninstall:**
+
+```
+/plugin uninstall superdev@superdev-skill
+```
 
 ### Local development
 
@@ -231,6 +249,7 @@ Both skills are markdown files. Adapt them:
 ```
 superdev-skill/
 ├── .claude-plugin/
+│   ├── marketplace.json      # marketplace manifest (name = "superdev-skill")
 │   └── plugin.json           # plugin manifest (name = "superdev")
 ├── skills/
 │   ├── superdev/
