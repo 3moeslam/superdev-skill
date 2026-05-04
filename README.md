@@ -1,11 +1,11 @@
-# superdev-skills
+# superdev — Claude Code plugin
 
 Two complementary [Claude Code](https://docs.claude.com/en/docs/claude-code) skills that enforce zero-compromise engineering discipline:
 
-- **`superdev`** — a max-effort development workflow with mandatory plan-before-code, TDD, parallel-first execution, single-bundle approval, staff-engineer review, and continuous execution between checkpoints.
-- **`team-code-review`** — a multi-agent code-review pipeline that spawns 7 specialist parallel reviewers, aggregates findings via a staff engineer, runs debate phases on disputed findings and proposed solutions, and produces a structured findings checklist with file:line references and team-recommended solutions.
+- **`/superdev:superdev`** — a max-effort development workflow with mandatory plan-before-code, TDD, parallel-first execution, single-bundle approval, staff-engineer review, and continuous execution between checkpoints.
+- **`/superdev:team-code-review`** — a multi-agent code-review pipeline that spawns 7 specialist parallel reviewers, aggregates findings via a staff engineer, runs debate phases on disputed findings and proposed solutions, and produces a structured findings checklist with file:line references and team-recommended solutions.
 
-The two skills compose: `superdev` ships the work, `team-code-review` reviews it.
+The two skills compose: `superdev:superdev` ships the work, `superdev:team-code-review` reviews it.
 
 ---
 
@@ -26,7 +26,7 @@ Both skills share a few non-negotiable principles:
 
 ## What's included
 
-### `superdev/`
+### `/superdev:superdev`
 
 A meta-workflow for non-trivial development tasks. Seven phases:
 
@@ -42,9 +42,7 @@ A meta-workflow for non-trivial development tasks. Seven phases:
 
 **Hard gates** include: effort=max, plan-first, red-test-before-green, modularity & encapsulation by default, best-practice-with-sources, single-approval-bundle with all-predicted-permissions, continuous execution, skill/MCP discovery before research, staff-engineer review before any user-facing artifact, parallel-first disposition with explicit DAG to act on it.
 
-**Activation**: `/superdev [task]`, `/plan [task]` (planning only), or `/use-superdev` (alias). Implicit on phrases like "implement X", "fix Y", "refactor Z".
-
-### `team-code-review/`
+### `/superdev:team-code-review`
 
 A six-phase code-review pipeline:
 
@@ -62,44 +60,32 @@ A six-phase code-review pipeline:
 5. **Solution Proposal & Debate** — proposer + challenger per surviving finding, parallel; staff engineer picks team-recommended solution.
 6. **Findings Checklist** — single MD artifact at `docs/code-review/<date>-<scope>.md` with `ID, Severity, File, Line, Reviewer(s), Finding, Rationale, Debate outcome, Team-recommended solution`.
 
-**Activation**: `/team-code-review [scope]` where scope is `branch | pr <n> | files <paths> | staged | commits <range>`. Implicit on phrases like "review this code", "PR review", "audit this".
+**Scope syntax:** `/superdev:team-code-review [scope]` where scope is `branch | pr <n> | files <paths> | staged | commits <range>`. Defaults to `branch` (current branch vs `main`).
 
 ---
 
 ## Install
 
-### Option 1 — install script (copy)
+### From git (recommended)
+
+In Claude Code:
+
+```
+/plugin install https://github.com/3moeslam/superdev-skill
+```
+
+Claude Code clones the repo and registers the plugin. Both skills become available immediately as `/superdev:superdev` and `/superdev:team-code-review`.
+
+### Local development
+
+Clone the repo and point Claude Code at it:
 
 ```sh
 git clone https://github.com/3moeslam/superdev-skill.git
-cd superdev-skill
-./install.sh
+claude --plugin-dir "$(pwd)/superdev-skill"
 ```
 
-This copies both skills into `~/.claude/skills/`. Re-run after pulling updates.
-
-### Option 2 — install script (symlink, for development)
-
-```sh
-./install.sh --link
-```
-
-This symlinks each skill into `~/.claude/skills/`, so edits to the repo are picked up immediately.
-
-### Option 3 — manual
-
-```sh
-cp -r superdev team-code-review ~/.claude/skills/
-```
-
-Or for symlinks:
-
-```sh
-ln -s "$(pwd)/superdev"          ~/.claude/skills/superdev
-ln -s "$(pwd)/team-code-review"  ~/.claude/skills/team-code-review
-```
-
-After install, restart your Claude Code session (or run `/skills reload` if your harness supports it) so the skills are picked up.
+Edits to `skills/*/SKILL.md` are picked up on the next `/reload-plugins`.
 
 ---
 
@@ -108,33 +94,33 @@ After install, restart your Claude Code session (or run `/skills reload` if your
 **Activate `superdev` for a task:**
 
 ```
-/superdev implement Amazon SP-API OAuth flow per VEN-003
+/superdev:superdev implement Amazon SP-API OAuth flow per VEN-003
 ```
 
-`superdev` will then run Phase 1 → Phase 7 with a single approval pause at the Phase 3 bundle.
+`superdev:superdev` will then run Phase 1 → Phase 7 with a single approval pause at the Phase 3 bundle.
 
 **Run a multi-agent code review on the current branch:**
 
 ```
-/team-code-review branch
+/superdev:team-code-review branch
 ```
 
 Or on a GitHub PR:
 
 ```
-/team-code-review pr 42
+/superdev:team-code-review pr 42
 ```
 
-The two compose: when superdev finishes Phase 5, you can invoke `/team-code-review branch` for the deep multi-agent review beyond the quick Phase 6 self-review.
+The two compose: when `superdev:superdev` finishes Phase 5, you can invoke `/superdev:team-code-review branch` for the deep multi-agent review beyond the quick Phase 6 self-review.
 
 ---
 
 ## Requirements
 
-- **Claude Code** (CLI, IDE extension, or web app — any harness that loads skills from `~/.claude/skills/`).
-- **`/effort max`** is recommended before invoking `superdev` — the workflow assumes the deepest reasoning budget.
+- **Claude Code** (CLI, IDE extension, or web app — any harness that supports the plugin system).
+- **`/effort max`** is recommended before invoking `superdev:superdev` — the workflow assumes the deepest reasoning budget.
 - **Git** (for repo recon and commit discipline).
-- **Tools the project itself needs** — language toolchains, lint/format runners, CI tools. The `superdev` Permissions Pre-Flight predicts these from a heuristic table at Phase 3.
+- **Tools the project itself needs** — language toolchains, lint/format runners, CI tools. The `superdev:superdev` Permissions Pre-Flight predicts these from a heuristic table at Phase 3.
 
 Optional but recommended:
 
@@ -147,16 +133,16 @@ Optional but recommended:
 
 Both skills are markdown files. Adapt them:
 
-- **Project-specific overrides**: keep your project's `CLAUDE.md` authoritative. The skill's `Priority Order` section explicitly defers to project rules where they conflict.
+- **Project-specific overrides**: keep your project's `CLAUDE.md` authoritative. Each skill's `Priority Order` section explicitly defers to project rules where they conflict.
 - **Language defaults**: the `Permissions Pre-Flight` heuristic table in `superdev` and the per-agent rubrics in `team-code-review` can be extended for new languages/frameworks.
-- **Composition**: `superdev` references `team-code-review` and several `superpowers:*` skills. Add or remove references as your skill set evolves.
+- **Composition**: `superdev` references `superdev:team-code-review` and several `superpowers:*` skills. Add or remove references as your skill set evolves.
 
 ---
 
 ## How they compose
 
 ```
-   /superdev <task>
+   /superdev:superdev <task>
         │
         ▼
    Phase 1–2 ─── plan + research + permissions
@@ -174,7 +160,7 @@ Both skills are markdown files. Adapt them:
    Phase 6 ─── quick self-review
         │
         ▼
-   /team-code-review branch ─── 7 specialists in parallel
+   /superdev:team-code-review branch ─── 7 specialists in parallel
         │
         ▼
    Staff engineer aggregation ─── dedupe / cluster / severity-arbitrate
@@ -191,6 +177,23 @@ Both skills are markdown files. Adapt them:
 
 ---
 
+## Repository layout
+
+```
+superdev-skill/
+├── .claude-plugin/
+│   └── plugin.json           # plugin manifest (name = "superdev")
+├── skills/
+│   ├── superdev/
+│   │   └── SKILL.md          # /superdev:superdev
+│   └── team-code-review/
+│       └── SKILL.md          # /superdev:team-code-review
+├── README.md
+└── LICENSE
+```
+
+---
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).
@@ -203,4 +206,5 @@ PRs welcome. The bar:
 
 - A change to a hard gate or workflow phase needs a one-paragraph rationale and at least one red-flag row covering the failure mode it prevents.
 - A change to a per-agent rubric needs a concrete example finding the rubric would now catch.
-- A new skill in this repo needs to compose cleanly with the two existing ones — say where it slots in.
+- A new skill in this plugin needs to compose cleanly with the two existing ones — say where it slots in.
+- Bump `version` in `.claude-plugin/plugin.json` for any release-worthy change.

@@ -36,14 +36,14 @@ Operate code review at the highest standard. The product: a **structured finding
 
 Invoke via:
 
-- `/team-code-review [scope]` — explicit invocation. Scope syntax:
+- `/superdev:team-code-review [scope]` — explicit invocation. Scope syntax:
   - `branch` — current branch vs main (default).
   - `pr <number>` — GitHub PR via `gh`.
   - `files <paths...>` — specific files.
   - `staged` — currently staged diff.
   - `commits <range>` — git revision range.
 - **Implicit triggers**: user says "review this code", "do a code review", "deep review", "PR review", "audit this".
-- **Composed**: from superdev — after Phase 5 (Verify) when the work merits cross-validated review beyond the quick Phase 6 self-review.
+- **Composed**: from `superdev:superdev` — after Phase 5 (Verify) when the work merits cross-validated review beyond the quick Phase 6 self-review.
 
 ---
 
@@ -257,7 +257,7 @@ Write the final artifact to `docs/code-review/<YYYY-MM-DD>-<scope-slug>.md`. Cre
 
 ## Composition with Other Skills
 
-- **superdev** — team-code-review is the natural deep review after superdev's Phase 5 (Verify). Superdev's Phase 6 self-review is the quick sanity check; team-code-review is what runs when the work merits cross-validated multi-agent review.
+- **`superdev:superdev`** — `superdev:team-code-review` is the natural deep review after `superdev:superdev`'s Phase 5 (Verify). The Phase 6 self-review is the quick sanity check; this skill is what runs when the work merits cross-validated multi-agent review.
 - **`superpowers:requesting-code-review`** — covers single-pass review workflows. team-code-review is the multi-agent variant; pick based on depth needed.
 - **`pr-review-toolkit:review-pr`** — pre-existing PR review skill with its own subagent set. team-code-review is independent but the two can be used in succession (theirs first for quick pass, this for depth, or the reverse).
 - **Project-specific review skills** — if a project ships its own review skill (architecture-aware, codebase-aware), prefer it as the project-specific reviewer; team-code-review covers what the project skill doesn't.

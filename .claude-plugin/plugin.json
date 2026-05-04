@@ -1,0 +1,10 @@
+{
+  "name": "superdev",
+  "version": "1.0.0",
+  "description": "Max-effort engineering workflow (superdev) plus a multi-agent code-review pipeline (team-code-review). Skills enforce plan-before-code, TDD, parallel-first execution, single-bundle approval with all-predicted-permissions, staff-engineer review before any user-facing artifact, continuous execution between checkpoints, and deep multi-agent code review with debate phases.",
+  "author": {
+    "name": "Eslam"
+  },
+  "homepage": "https://github.com/3moeslam/superdev-skill",
+  "repository": "https://github.com/3moeslam/superdev-skill"
+}

@@ -42,10 +42,9 @@ Operate at the highest standard of engineering. The product: code that is **corr
 This skill is invoked in two ways:
 
 1. **Implicit** — any user message matching the trigger description loads the skill automatically.
-2. **Explicit slash commands** — once invoked, the skill stays active for the rest of the conversation:
-   - `/superdev [task]` — full workflow (Phases 1–7).
-   - `/plan [task]` — planning only (Phases 1–3); stops after the plan is confirmed.
-   - `/use-superdev [task]` — alias of `/superdev`.
+2. **Explicit slash command** — once invoked, the skill stays active for the rest of the conversation:
+   - `/superdev:superdev [task]` — full workflow (Phases 1–7).
+   - Top-level `/plan` and `/use-superdev` aliases may exist if your harness installs them separately; otherwise call this skill directly.
 
 When activated explicitly, treat **every subsequent development-task message in the conversation** as a superdev task and run the full workflow with no shortcuts. Do not lapse back to default behavior between turns. The user can opt out for a single message with phrases like "just answer this" / "no need for the workflow" — honor that for that turn only, then resume.
 
@@ -704,7 +703,7 @@ superdev is a meta-workflow. Defer to specialists when they apply:
 - Writing the plan document → `superpowers:writing-plans` for structure.
 - TDD discipline deep-dive → `superpowers:test-driven-development`.
 - Verification evidence → `superpowers:verification-before-completion`.
-- Code review after self-review → `superpowers:requesting-code-review` for single-pass review, or `team-code-review` for the multi-agent pipeline (7 specialist parallel reviewers + staff engineer aggregation + finding/solution debates + structured checklist). Use `team-code-review` when the change merits cross-validated depth — features, security-sensitive code, architecture-touching diffs, or anything heading to a release branch.
+- Code review after self-review → `superpowers:requesting-code-review` for single-pass review, or `superdev:team-code-review` for the multi-agent pipeline (7 specialist parallel reviewers + staff engineer aggregation + finding/solution debates + structured checklist). Use `superdev:team-code-review` when the change merits cross-validated depth — features, security-sensitive code, architecture-touching diffs, or anything heading to a release branch.
 - Debugging unexpected behavior → `superpowers:systematic-debugging`.
 - **Parallel execution mechanics** (when the plan declares > 1 track):
   - Isolated git worktrees per track → `superpowers:using-git-worktrees`.
