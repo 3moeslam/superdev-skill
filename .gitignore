@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local environment
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.bak
+
+# OS thumbnails
+Thumbs.db
+
+# Local notes (use docs/ for shared notes)
+NOTES.md
+TODO.local.md
