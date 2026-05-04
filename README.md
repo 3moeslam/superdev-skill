@@ -71,8 +71,8 @@ A six-phase code-review pipeline:
 ### Option 1 — install script (copy)
 
 ```sh
-git clone https://github.com/<your-org-or-username>/superdev-skills.git ~/superdev-skills
-cd ~/superdev-skills
+git clone https://github.com/3moeslam/superdev-skill.git
+cd superdev-skill
 ./install.sh
 ```
 
