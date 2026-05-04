@@ -700,7 +700,8 @@ These are enforced during Phase 4 alongside the in-workflow table:
 ## Composition with Other Skills
 
 superdev is a meta-workflow. Defer to specialists when they apply:
-- Vague problem space → `superpowers:brainstorming` first, then return to Phase 1.
+- Vague problem space, **single-mind quick exploration** → `superpowers:brainstorming` first, then return to Phase 1.
+- **New feature design needing cross-disciplinary input** (UI/UX + same-platform engineers + opposite-platform engineer + backend + QA, with debate and staff-engineer synthesis) → `superdev:team-brainstorm` first. Its output document becomes the input to Phase 1 here. Use `team-brainstorm` for non-trivial features; the brainstorm doc shortcuts a lot of Phase 1–2 work.
 - Writing the plan document → `superpowers:writing-plans` for structure.
 - TDD discipline deep-dive → `superpowers:test-driven-development`.
 - Verification evidence → `superpowers:verification-before-completion`.

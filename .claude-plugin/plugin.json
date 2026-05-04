@@ -1,7 +1,7 @@
 {
   "name": "superdev",
-  "version": "1.0.0",
-  "description": "Max-effort engineering workflow (superdev) plus a multi-agent code-review pipeline (team-code-review). Skills enforce plan-before-code, TDD, parallel-first execution, single-bundle approval with all-predicted-permissions, staff-engineer review before any user-facing artifact, continuous execution between checkpoints, and deep multi-agent code review with debate phases.",
+  "version": "1.1.0",
+  "description": "Three-skill engineering workflow: team-brainstorm (multi-agent feature design), superdev (max-effort dev workflow), team-code-review (multi-agent code review). End-to-end pipeline enforces plan-before-code, TDD, parallel-first execution, single-bundle approval with all-predicted-permissions, staff-engineer review before any user-facing artifact, continuous execution between checkpoints, and cross-disciplinary debate phases (UI/UX, two same-platform engineers, opposite-platform engineer for cross-pollination, backend, QA) for both brainstorming and review.",
   "author": {
     "name": "Eslam"
   },

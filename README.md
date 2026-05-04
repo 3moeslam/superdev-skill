@@ -1,11 +1,12 @@
 # superdev — Claude Code plugin
 
-Two complementary [Claude Code](https://docs.claude.com/en/docs/claude-code) skills that enforce zero-compromise engineering discipline:
+Three complementary [Claude Code](https://docs.claude.com/en/docs/claude-code) skills that enforce zero-compromise engineering discipline across the full feature lifecycle:
 
+- **`/superdev:team-brainstorm`** — a multi-agent feature-design pipeline that gathers area / designs / requirements, then fans out 6 specialist agents (Senior UI/UX, two same-platform engineers, opposite-platform engineer, backend engineer, QA), runs a debate phase, lets a same-platform staff engineer do web research and synthesis, and produces a short brainstorm document.
 - **`/superdev:superdev`** — a max-effort development workflow with mandatory plan-before-code, TDD, parallel-first execution, single-bundle approval, staff-engineer review, and continuous execution between checkpoints.
 - **`/superdev:team-code-review`** — a multi-agent code-review pipeline that spawns 7 specialist parallel reviewers, aggregates findings via a staff engineer, runs debate phases on disputed findings and proposed solutions, and produces a structured findings checklist with file:line references and team-recommended solutions.
 
-The two skills compose: `superdev:superdev` ships the work, `superdev:team-code-review` reviews it.
+The three skills compose end-to-end: **`team-brainstorm`** designs the feature → **`superdev`** ships it → **`team-code-review`** reviews it.
 
 ---
 
@@ -25,6 +26,26 @@ Both skills share a few non-negotiable principles:
 ---
 
 ## What's included
+
+### `/superdev:team-brainstorm`
+
+A seven-phase upfront feature-design pipeline:
+
+1. **Area Identification** — entry points, screens, modules, platform detection.
+2. **Design Acquisition** — Figma (via MCP) or screenshots; explicit waiver if no designs.
+3. **Requirements Gathering** — per entry point and per screen (data, actions, edge states).
+4. **Specialist Brainstorm** — 6 agents in **one parallel dispatch**:
+   - Senior UI/UX (app-native + market standards)
+   - Senior Engineer, same platform — A
+   - Senior Engineer, same platform — B *(independent perspective)*
+   - Senior Engineer, opposite platform *(cross-pollination)*
+   - Backend Engineer *(existing endpoint check or proposed response shape)*
+   - QA Engineer *(test cases & edge cases)*
+5. **Debate** — pair debates per disagreement; staff engineer adjudicates.
+6. **Staff Engineer Research & Synthesis** — same-platform staff engineer with web-research authority unifies positions.
+7. **Brainstorm Document** — `docs/brainstorm/<date>-<feature>.md` with feature description, scope, design references, short plan, per-platform notes, API/backend notes, test outline, open questions, concerns.
+
+The brainstorm document is the input to the next stage (`/superdev:superdev`).
 
 ### `/superdev:superdev`
 
@@ -91,6 +112,14 @@ Edits to `skills/*/SKILL.md` are picked up on the next `/reload-plugins`.
 
 ## Usage
 
+**Brainstorm a new feature before building it:**
+
+```
+/superdev:team-brainstorm seller onboarding redesign
+```
+
+`team-brainstorm` runs Phase 1 → Phase 7 and writes a short MD at `docs/brainstorm/<date>-<feature>.md`.
+
 **Activate `superdev` for a task:**
 
 ```
@@ -144,7 +173,25 @@ Both skills are markdown files. Adapt them:
 ## How they compose
 
 ```
-   /superdev:superdev <task>
+   /superdev:team-brainstorm <feature>
+        │
+        ▼
+   Phases 1–3 ─── area + designs + requirements
+        │
+        ▼
+   Phase 4 ─── 6 specialists in parallel (UI/UX, eng-A, eng-B, eng-cross, backend, QA)
+        │
+        ▼
+   Phase 5 ─── pair-debates per disagreement
+        │
+        ▼
+   Phase 6 ─── same-platform staff engineer + web research + synthesis
+        │
+        ▼
+   Brainstorm Doc ─── docs/brainstorm/<date>-<feature>.md
+        │
+        ▼
+   /superdev:superdev <task>           (loads brainstorm doc as context)
         │
         ▼
    Phase 1–2 ─── plan + research + permissions
@@ -188,6 +235,8 @@ superdev-skill/
 ├── skills/
 │   ├── superdev/
 │   │   └── SKILL.md          # /superdev:superdev
+│   ├── team-brainstorm/
+│   │   └── SKILL.md          # /superdev:team-brainstorm
 │   └── team-code-review/
 │       └── SKILL.md          # /superdev:team-code-review
 ├── commands/

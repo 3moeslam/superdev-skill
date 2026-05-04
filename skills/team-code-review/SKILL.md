@@ -258,6 +258,7 @@ Write the final artifact to `docs/code-review/<YYYY-MM-DD>-<scope-slug>.md`. Cre
 ## Composition with Other Skills
 
 - **`superdev:superdev`** — `superdev:team-code-review` is the natural deep review after `superdev:superdev`'s Phase 5 (Verify). The Phase 6 self-review is the quick sanity check; this skill is what runs when the work merits cross-validated multi-agent review.
+- **`superdev:team-brainstorm`** — the upstream sibling. `team-brainstorm` produces the brainstorm document → `superdev:superdev` ships the work → `team-code-review` reviews it. The full pipeline is `team-brainstorm` → `superdev` → `team-code-review`.
 - **`superpowers:requesting-code-review`** — covers single-pass review workflows. team-code-review is the multi-agent variant; pick based on depth needed.
 - **`pr-review-toolkit:review-pr`** — pre-existing PR review skill with its own subagent set. team-code-review is independent but the two can be used in succession (theirs first for quick pass, this for depth, or the reverse).
 - **Project-specific review skills** — if a project ships its own review skill (architecture-aware, codebase-aware), prefer it as the project-specific reviewer; team-code-review covers what the project skill doesn't.
