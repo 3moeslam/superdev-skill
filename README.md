@@ -99,6 +99,8 @@ Edits to `skills/*/SKILL.md` are picked up on the next `/reload-plugins`.
 
 `superdev:superdev` will then run Phase 1 → Phase 7 with a single approval pause at the Phase 3 bundle.
 
+`/superdev:use-superdev [task]` is provided as an alias — same workflow, shorter to type when the namespace is in muscle memory.
+
 **Run a multi-agent code review on the current branch:**
 
 ```
@@ -188,6 +190,8 @@ superdev-skill/
 │   │   └── SKILL.md          # /superdev:superdev
 │   └── team-code-review/
 │       └── SKILL.md          # /superdev:team-code-review
+├── commands/
+│   └── use-superdev.md       # /superdev:use-superdev — alias for /superdev:superdev
 ├── README.md
 └── LICENSE
 ```

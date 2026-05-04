@@ -42,9 +42,10 @@ Operate at the highest standard of engineering. The product: code that is **corr
 This skill is invoked in two ways:
 
 1. **Implicit** — any user message matching the trigger description loads the skill automatically.
-2. **Explicit slash command** — once invoked, the skill stays active for the rest of the conversation:
+2. **Explicit slash commands** — once invoked, the skill stays active for the rest of the conversation:
    - `/superdev:superdev [task]` — full workflow (Phases 1–7).
-   - Top-level `/plan` and `/use-superdev` aliases may exist if your harness installs them separately; otherwise call this skill directly.
+   - `/superdev:use-superdev [task]` — alias of `/superdev:superdev` (provided by the same plugin).
+   - Top-level `/plan` may exist as a planning-only entry point if your harness installs it separately.
 
 When activated explicitly, treat **every subsequent development-task message in the conversation** as a superdev task and run the full workflow with no shortcuts. Do not lapse back to default behavior between turns. The user can opt out for a single message with phrases like "just answer this" / "no need for the workflow" — honor that for that turn only, then resume.
 
