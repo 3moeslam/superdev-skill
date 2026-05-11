@@ -10,7 +10,7 @@
         "source": "github",
         "repo": "3moeslam/superdev-skill"
       },
-      "description": "Three-skill engineering workflow: team-brainstorm (multi-agent feature design), superdev (max-effort dev workflow), team-code-review (multi-agent code review). End-to-end pipeline with cross-disciplinary debate, parallel-first execution, single-bundle approval with all-predicted-permissions, and staff-engineer review before any user-facing artifact."
+      "description": "Four-skill engineering workflow: team-brainstorm (multi-agent feature design), team-feature-plan (staff-engineer architecture + parallel-execution planning with foundation-sprint sequencing and per-engineer task packets), superdev (max-effort dev workflow), team-code-review (multi-agent code review). End-to-end pipeline with cross-disciplinary debate, parallel-first execution, single-bundle approval with all-predicted-permissions, and staff-engineer review before any user-facing artifact."
     }
   ]
 }
